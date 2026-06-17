@@ -19,6 +19,9 @@
   --green-ink:#56781F;  /* green for text/links on light (AA contrast) */
   --green-soft:#EDF3E0;
   --white:#FFFFFF;
+  --ink-surface:#24242A;  /* always-dark bands: top bar, footer, CTA, popup heads */
+  --on-ink:#FCFCFA;       /* light text that sits on --ink-surface */
+  --elev:#FFFFFF;         /* raised panels: dropdown, a11y panel, popups */
 
   --r:3px;              /* sharp radius */
   --r-sm:2px;
@@ -51,6 +54,9 @@
   --green-ink:#A7CE63;
   --green-soft:#262B1C;
   --white:#202126;
+  --ink-surface:#0F1014;  /* deeper than page so dark bands stay distinct */
+  --on-ink:#ECECE4;
+  --elev:#2A2B31;         /* lighter than page so panels read as raised */
   --shadow:0 1px 0 rgba(0,0,0,.2);
   --shadow-hover:0 16px 40px -20px rgba(0,0,0,.7);
 }
@@ -133,7 +139,7 @@ p{margin:0 0 1rem}
 /* ============================================================
    HEADER
    ============================================================ */
-.topbar{background:var(--ink);color:#D9D9D2;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em}
+.topbar{background:var(--ink-surface);color:#D9D9D2;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:38px;padding-block:6px}
 .topbar a{color:#D9D9D2;display:inline-flex;align-items:center;gap:.45em}
 .topbar a:hover{color:#fff}
@@ -167,7 +173,7 @@ p{margin:0 0 1rem}
 
 .submenu{
   position:absolute;top:calc(100% + 8px);left:0;min-width:248px;
-  background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  background:var(--elev);border:1px solid var(--line-strong);border-radius:var(--r);
   box-shadow:var(--shadow-hover);padding:8px;opacity:0;visibility:hidden;
   transform:translateY(6px);transition:var(--tr);z-index:40;
 }
@@ -194,8 +200,8 @@ p{margin:0 0 1rem}
 
 /* mobile menu */
 .mobile-menu{
-  position:fixed;inset:0 0 0 auto;width:min(380px,90vw);background:var(--paper);
-  border-left:1px solid var(--line);z-index:210;transform:translateX(100%);
+  position:fixed;inset:0 0 0 auto;width:min(380px,90vw);background:var(--elev);
+  border-left:1px solid var(--line-strong);z-index:210;transform:translateX(100%);
   transition:transform var(--tr);display:flex;flex-direction:column;overflow-y:auto;
 }
 .mobile-menu.open{transform:none}
@@ -463,25 +469,25 @@ a.card:hover .more svg{transform:translateX(3px)}
 /* ============================================================
    CTA BAND (ink, restrained)
    ============================================================ */
-.cta{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:clamp(36px,5vw,64px);
+.cta{background:var(--ink-surface);color:var(--on-ink);border-radius:var(--r);padding:clamp(36px,5vw,64px);
   display:grid;grid-template-columns:1.4fr auto;gap:32px;align-items:center;position:relative;overflow:hidden}
 .cta::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
   background:linear-gradient(90deg,var(--green),transparent 40%)}
-.cta h2{color:var(--paper)}
+.cta h2{color:var(--on-ink)}
 .cta .label{color:#B9B9B1}
 .cta .label::before{background:var(--green)}
 .cta p{color:#C7C7BF;margin:14px 0 0;max-width:52ch}
 .cta-actions{display:flex;gap:12px;flex-wrap:wrap}
-.cta .btn-primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.cta .btn-primary{background:var(--on-ink);color:#1c1c20;border-color:var(--on-ink)}
 .cta .btn-primary:hover{background:var(--green);color:var(--ink);border-color:var(--green)}
-.cta .btn-outline{color:var(--paper);border-color:rgba(255,255,255,.3)}
-.cta .btn-outline:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.cta .btn-outline{color:var(--on-ink);border-color:rgba(255,255,255,.32)}
+.cta .btn-outline:hover{background:var(--on-ink);color:#1c1c20;border-color:var(--on-ink)}
 @media (max-width:760px){.cta{grid-template-columns:1fr;gap:24px}}
 
 /* ============================================================
    FOOTER
    ============================================================ */
-.foot{background:var(--ink);color:#BDBDB5;border-top:3px solid var(--green)}
+.foot{background:var(--ink-surface);color:#BDBDB5;border-top:3px solid var(--green)}
 [data-theme="dark"] .foot{border-top-color:var(--green)}
 .foot a{color:#BDBDB5}
 .foot a:hover{color:#fff}
@@ -528,12 +534,12 @@ a.card:hover .more svg{transform:translateX(3px)}
 
 /* ---- WhatsApp / Email guided step popups ---- */
 .chan{position:fixed;left:20px;bottom:82px;z-index:195;width:min(360px,calc(100vw - 40px));max-height:min(78vh,620px);
-  overflow-y:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-hover);
+  overflow-y:auto;background:var(--elev);border:1px solid var(--line-strong);border-radius:14px;box-shadow:var(--shadow-hover);
   opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom left}
 .chan.open{opacity:1;visibility:visible;transform:none}
 .chan.mail{bottom:144px}
-.chan-head{display:flex;align-items:center;gap:11px;padding:15px 17px;background:var(--ink);color:var(--paper);position:sticky;top:0}
-.chan.mail .chan-head{background:#2A2A30}
+.chan-head{display:flex;align-items:center;gap:11px;padding:15px 17px;background:var(--ink-surface);color:var(--on-ink);position:sticky;top:0}
+.chan.mail .chan-head{background:var(--ink-surface)}
 .chan-head .ci{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.12)}
 .chan.wa .chan-head .ci{background:#25D366}
 .chan-head .ci svg{width:19px;height:19px;color:#fff;fill:#fff}
@@ -569,17 +575,17 @@ textarea.chan-field{resize:vertical;min-height:66px}
 .chan-send{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:10px;
   border:0;cursor:pointer;font-family:var(--font-body);font-weight:500;font-size:.94rem;transition:var(--tr)}
 .chan.wa .chan-send{background:#25D366;color:#fff}
-.chan.mail .chan-send{background:var(--ink);color:var(--paper)}
+.chan.mail .chan-send{background:var(--ink-surface);color:var(--on-ink)}
 .chan-send:hover{transform:translateY(-2px)}
 .chan-send svg{width:18px;height:18px;fill:currentColor}
 
 /* ---- Fino: conversational assistant ---- */
 .fino{position:fixed;left:20px;bottom:144px;z-index:195;width:min(372px,calc(100vw - 40px));
-  height:min(540px,calc(100vh - 180px));background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  height:min(540px,calc(100vh - 180px));background:var(--elev);border:1px solid var(--line-strong);border-radius:14px;
   box-shadow:var(--shadow-hover);display:flex;flex-direction:column;overflow:hidden;
   opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom left}
 .fino.open{opacity:1;visibility:visible;transform:none}
-.fino-head{display:flex;align-items:center;gap:11px;padding:13px 15px;background:var(--ink);color:var(--paper);flex:none}
+.fino-head{display:flex;align-items:center;gap:11px;padding:13px 15px;background:var(--ink-surface);color:var(--on-ink);flex:none}
 .fino-av{width:40px;height:40px;border-radius:50%;background:var(--green);color:#1c1c20;display:grid;place-items:center;
   font-family:var(--font-display);font-weight:600;font-size:1.15rem;position:relative;flex:none}
 .fino-av::after{content:"";position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#25D366;border:2px solid var(--ink)}
@@ -624,7 +630,7 @@ textarea.chan-field{resize:vertical;min-height:66px}
 .gotop.show{opacity:1;visibility:visible;transform:none}
 .gotop svg{width:18px;height:18px}
 
-.a11y-panel{position:fixed;inset:0 0 0 auto;width:min(330px,90vw);background:var(--paper);border-left:1px solid var(--line);
+.a11y-panel{position:fixed;inset:0 0 0 auto;width:min(330px,90vw);background:var(--elev);border-left:1px solid var(--line-strong);box-shadow:var(--shadow-hover);
   z-index:210;transform:translateX(100%);transition:transform var(--tr);display:flex;flex-direction:column;overflow-y:auto}
 .a11y-panel.open{transform:none}
 .a11y-top{display:flex;align-items:center;justify-content:space-between;padding:18px var(--gut);border-bottom:1px solid var(--line)}
