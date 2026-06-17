@@ -37,18 +37,6 @@
 </head>
 <body class="">
 <header>
-  <div class="topbar">
-    <div class="wrap">
-      <div class="tb-left">
-        <a href="tel:0732777700"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>(07) 3277 7700</a>
-        <a href="mailto:info@myfin.net.au"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="m22 7-10 6L2 7"/></svg>info@myfin.net.au</a>
-      </div>
-      <div class="tb-right">
-        <span>Salisbury <span class="dotsep">·</span> Lutwyche <span class="dotsep">·</span> Heathwood</span>
-        <span>ABN 91 164 033 247</span>
-      </div>
-    </div>
-  </div>
   <nav class="nav" aria-label="Primary">
     <div class="wrap">
       <a class="brand " href="index.html" aria-label="Myfin Group home"><img class="logo-light" src="logo-myfin.png" alt="Myfin Group" width="62" height="30"><img class="logo-dark" src="logo-myfin-light.png" alt="Myfin Group" width="62" height="30"></a>
@@ -168,9 +156,18 @@
   </div>
 </section>
 
-<button class="mfab wa" id="waBtn" onclick="toggleChannel('wa')" aria-label="Chat on WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M12.04 2.01c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01a9.82 9.82 0 0 0-7.02-2.9zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.06 0 1.22.89 2.4 1.01 2.56.12.17 1.74 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.3z"/></svg></button>
-<button class="mfab mail" id="mailBtn" onclick="toggleChannel('mail')" aria-label="Email us" title="Email"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm.4 2L12 12.7 20.6 7H3.4zM20 8.9l-7.4 4.9a1 1 0 01-1.2 0L4 8.9V17h16V8.9z"/></svg></button>
-<button class="mfab ask" id="finoBtn" onclick="toggleFino()" aria-label="Chat with Fino, the Myfin assistant" title="Ask Fino"><span class="pulse"></span><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2.2l1.7 4.6 4.6 1.7-4.6 1.7L12 14.8l-1.7-4.6L5.7 8.5l4.6-1.7L12 2.2z"/><circle cx="18.4" cy="16.6" r="1.7"/><circle cx="6.2" cy="17.4" r="1.15"/></svg></button>
+<div class="fab fab-ask" style="left:20px;bottom:20px">
+  <button class="mfab ask" id="finoBtn" onclick="toggleFino()" aria-label="Chat with Fino, the Myfin assistant" title="Ask Fino"><span class="pulse"></span><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2.2l1.7 4.6 4.6 1.7-4.6 1.7L12 14.8l-1.7-4.6L5.7 8.5l4.6-1.7L12 2.2z"/><circle cx="18.4" cy="16.6" r="1.7"/><circle cx="6.2" cy="17.4" r="1.15"/></svg></button>
+  <span class="fab-tip" id="tipFino">Chat with Fino for more info or to get in touch</span>
+</div>
+<div class="fab fab-wa fab-right" style="right:20px;bottom:20px">
+  <span class="fab-tip" id="tipWa">Message us on WhatsApp</span>
+  <button class="mfab wa" id="waBtn" onclick="toggleChannel('wa')" aria-label="Chat on WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M12.04 2.01c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01a9.82 9.82 0 0 0-7.02-2.9zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.06 0 1.22.89 2.4 1.01 2.56.12.17 1.74 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.3z"/></svg></button>
+</div>
+<div class="fab fab-mail fab-right" style="right:20px;bottom:82px">
+  <span class="fab-tip" id="tipMail">Email the team a question</span>
+  <button class="mfab mail" id="mailBtn" onclick="toggleChannel('mail')" aria-label="Email us" title="Email"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M3 5h18a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V6a1 1 0 011-1zm.4 2L12 12.7 20.6 7H3.4zM20 8.9l-7.4 4.9a1 1 0 01-1.2 0L4 8.9V17h16V8.9z"/></svg></button>
+</div>
 
 
 <section class="chan wa" id="waPopup" role="dialog" aria-label="Chat on WhatsApp">
@@ -261,6 +258,11 @@
       <div class="foot-brand">
         <img src="logo-myfin-light.png" alt="Myfin Group" width="66" height="32">
         <p>A Brisbane boutique accounting and mortgage broking firm — accounting, tax, book-keeping and finance under one roof.</p>
+        <div class="foot-reach">
+          <a href="tel:0732777700"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>(07) 3277 7700</a>
+          <a href="mailto:info@myfin.net.au"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="m22 7-10 6L2 7"/></svg>info@myfin.net.au</a>
+          <span class="foot-abn">ABN 91 164 033 247</span>
+        </div>
         <div class="foot-soc">
           <a href="https://www.facebook.com/pages/Myfin-Group/436011683159539" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="https://wa.me/61732777700" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12.04 2.01c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01a9.82 9.82 0 0 0-7.02-2.9zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.06 0 1.22.89 2.4 1.01 2.56.12.17 1.74 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.3z"/></svg></a>
@@ -551,6 +553,16 @@
     var rt=null;
     window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
     buildDots(); go(0); start();
+  })();
+
+  /* ---------- float message bubbles: gentle one-time attention reveal ---------- */
+  (function(){
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce)return;
+    [['fab-wa',1300],['fab-mail',2000],['fab-ask',2700]].forEach(function(p){
+      var el=document.querySelector('.'+p[0]); if(!el)return;
+      setTimeout(function(){ el.classList.add('show'); setTimeout(function(){ el.classList.remove('show'); },4400); }, p[1]);
+    });
   })();
 
   var goTop=$('#goTop');

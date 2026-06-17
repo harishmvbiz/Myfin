@@ -45,21 +45,41 @@
   --graphite:#BCBCB4;
   --muted:#9A9A92;
   --paper:#191A1D;
-  --paper-2:#1F2024;
-  --panel:#26272C;
-  --line:#3A3B42;
-  --line-strong:#4C4D55;
-  --field:#202126;
+  --paper-2:#202127;
+  --panel:#2A2B31;
+  --line:#3D3E46;
+  --line-strong:#52535C;
+  --field:#212228;
   --green:#9CC65A;
   --green-ink:#A7CE63;
   --green-soft:#262B1C;
-  --white:#202126;
+  --white:#24252C;
   --ink-surface:#0F1014;  /* deeper than page so dark bands stay distinct */
   --on-ink:#ECECE4;
   --elev:#2A2B31;         /* lighter than page so panels read as raised */
   --shadow:0 1px 0 rgba(0,0,0,.2);
   --shadow-hover:0 16px 40px -20px rgba(0,0,0,.7);
 }
+
+/* ---- dark mode: green accents on bands + a hover "glow" so the cursor is visible ---- */
+[data-theme="dark"] .section.alt{border-block:1px solid rgba(156,198,90,.16)}
+[data-theme="dark"] .marquee{border-color:rgba(156,198,90,.22);background:#202127}
+[data-theme="dark"] .hero-figs,[data-theme="dark"] .hero-creds{border-top-color:rgba(156,198,90,.22)}
+[data-theme="dark"] .shead h2::after{background:var(--green)}
+[data-theme="dark"] .card,[data-theme="dark"] .quote,[data-theme="dark"] .res-card,[data-theme="dark"] .office,[data-theme="dark"] .pillar{
+  box-shadow:0 1px 0 rgba(0,0,0,.3),0 0 0 1px rgba(255,255,255,.02)}
+[data-theme="dark"] a.card:hover,
+[data-theme="dark"] button.card:hover,
+[data-theme="dark"] .res-card:hover,
+[data-theme="dark"] .office:hover{
+  border-color:var(--green);
+  box-shadow:0 0 0 1px rgba(156,198,90,.45),0 18px 50px -16px rgba(156,198,90,.35);
+  background:#282A32}
+[data-theme="dark"] .svc-row:hover{background:rgba(156,198,90,.06)}
+[data-theme="dark"] .nav-links a:hover{background:rgba(156,198,90,.10)}
+[data-theme="dark"] .submenu a:hover{background:rgba(156,198,90,.12)}
+[data-theme="dark"] .faq-item:hover summary{color:var(--green)}
+[data-theme="dark"] .btn-outline:hover{box-shadow:0 0 0 1px rgba(156,198,90,.4)}
 
 *{box-sizing:border-box}
 html{font-size:calc(100% * var(--a11y-fs));scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -151,7 +171,7 @@ p{margin:0 0 1rem}
 @media (max-width:560px){.topbar .tb-left{gap:14px;font-size:.68rem}}
 
 .nav{position:sticky;top:0;z-index:120;background:color-mix(in srgb,var(--paper) 88%,transparent);
-  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+  backdrop-filter:saturate(1.4) blur(10px);border-bottom:3px solid var(--green)}
 .nav .wrap{display:flex;align-items:center;gap:26px;min-height:72px}
 .brand{display:inline-flex;align-items:center;flex:none;margin-right:auto}
 .brand img{height:30px;width:auto}
@@ -388,8 +408,9 @@ a.card:hover .more svg{transform:translateX(3px)}
 .quote .mark{font-family:var(--font-display);font-size:2.6rem;line-height:.6;color:var(--green);height:.6em}
 .quote blockquote{font-family:var(--font-display);font-size:1.12rem;line-height:1.5;color:var(--ink);margin:14px 0 0;font-weight:400}
 .quote .who{display:flex;align-items:center;gap:.7em;margin-top:auto;padding-top:22px}
-.quote .who .nm{font-weight:600;font-size:.92rem}
-.quote .who .rl{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.quote .who>span:last-child{display:flex;flex-direction:column;gap:3px}
+.quote .who .nm{font-weight:600;font-size:.92rem;line-height:1.2}
+.quote .who .rl{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;line-height:1.3}
 .quote .who .ln{width:22px;height:1px;background:var(--green);flex:none}
 .quote.feature{padding:clamp(30px,3.5vw,44px);background:var(--white)}
 .quote.feature .mark{font-size:3.4rem;color:var(--green)}
@@ -537,6 +558,11 @@ a.card:hover .more svg{transform:translateX(3px)}
   padding-block:clamp(44px,6vw,64px)}
 .foot-brand img{height:32px;width:auto;margin-bottom:18px}
 .foot-brand p{font-size:.9rem;line-height:1.65;color:#9D9D95;max-width:32ch}
+.foot-reach{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.foot-reach a{display:inline-flex;align-items:center;gap:.6em;color:#E6E6DE;font-size:.92rem;font-weight:500;width:max-content}
+.foot-reach a:hover{color:var(--green)}
+.foot-reach a svg{width:15px;height:15px;color:var(--green)}
+.foot-reach .foot-abn{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;color:#8E8E86;margin-top:2px}
 .foot-soc{display:flex;gap:10px;margin-top:18px}
 .foot-soc a{width:34px;height:34px;display:grid;place-items:center;border:1px solid #3A3A40;border-radius:var(--r-sm);transition:var(--tr)}
 .foot-soc a:hover{border-color:var(--green);color:var(--green)}
@@ -559,25 +585,46 @@ a.card:hover .more svg{transform:translateX(3px)}
 /* ============================================================
    FLOATS · POPUPS · A11Y · SCRIM · GOTOP
    ============================================================ */
-/* ---- three floating buttons: WhatsApp · Email · Fino ---- */
-.mfab{position:fixed;left:20px;z-index:140;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+/* ---- three floating buttons (Fino left · WhatsApp + Email right) with pointing message bubbles ---- */
+.fab{position:fixed;z-index:140;width:52px;height:52px}
+.mfab{position:relative;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
   cursor:pointer;border:1px solid;box-shadow:var(--shadow-hover);transition:var(--tr)}
 .mfab:hover{transform:translateY(-3px) scale(1.04)}
 .mfab svg{width:24px;height:24px}
-.mfab.wa{bottom:20px;background:#25D366;border-color:#25D366;color:#fff}
+.mfab.wa{background:#25D366;border-color:#25D366;color:#fff}
 .mfab.wa svg{width:28px;height:28px}
-.mfab.mail{bottom:82px;background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.mfab.ask{bottom:144px;background:var(--ink);border-color:var(--green);color:var(--paper)}
+.mfab.mail{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.mfab.ask{background:var(--ink);border-color:var(--green);color:var(--paper)}
 .mfab.ask svg{width:24px;height:24px;color:var(--green)}
 .mfab .pulse{position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:var(--green);
   box-shadow:0 0 0 0 rgba(141,181,74,.6);animation:mpulse 2s infinite}
 @keyframes mpulse{0%{box-shadow:0 0 0 0 rgba(141,181,74,.5)}70%{box-shadow:0 0 0 8px rgba(141,181,74,0)}100%{box-shadow:0 0 0 0 rgba(141,181,74,0)}}
-@media (max-width:600px){.mfab{width:48px;height:48px}.mfab.mail{bottom:76px}.mfab.ask{bottom:132px}}
+/* the pointing message bubble — absolutely placed so it never blocks the page */
+.fab-tip{position:absolute;top:50%;width:max-content;max-width:220px;background:var(--elev);color:var(--ink);
+  border:1px solid var(--line-strong);border-radius:12px;padding:10px 14px;
+  font-size:.84rem;line-height:1.35;font-weight:500;box-shadow:var(--shadow-hover);
+  opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none}
+/* left-side float (Fino): bubble to the RIGHT, pointer aims left */
+.fab-ask .fab-tip{left:calc(100% + 12px);transform:translateY(-50%) translateX(-8px)}
+.fab-ask .fab-tip::before{content:"";position:absolute;left:-7px;top:50%;margin-top:-7px;
+  width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:7px solid var(--green)}
+.fab-ask .fab-tip::after{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;
+  width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:6px solid var(--elev)}
+.fab-ask .fab-tip{border-color:var(--green)}
+/* right-side floats (WhatsApp/Email): bubble to the LEFT, pointer aims right */
+.fab-right .fab-tip{right:calc(100% + 12px);transform:translateY(-50%) translateX(8px)}
+.fab-right .fab-tip::before{content:"";position:absolute;right:-7px;top:50%;margin-top:-7px;
+  width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:7px solid var(--line-strong)}
+.fab-right .fab-tip::after{content:"";position:absolute;right:-6px;top:50%;margin-top:-6px;
+  width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:6px solid var(--elev)}
+.fab:hover .fab-tip,.fab:focus-within .fab-tip,.fab.show .fab-tip{opacity:1;visibility:visible;
+  transform:translateY(-50%) translateX(0)}
+@media (max-width:600px){.fab,.mfab{width:48px;height:48px}.fab-mail{bottom:76px!important}.fab-tip{display:none}}
 
 /* ---- WhatsApp / Email guided step popups ---- */
-.chan{position:fixed;left:20px;bottom:82px;z-index:195;width:min(360px,calc(100vw - 40px));max-height:min(78vh,620px);
+.chan{position:fixed;right:20px;bottom:84px;z-index:195;width:min(360px,calc(100vw - 40px));max-height:min(78vh,620px);
   overflow-y:auto;background:var(--elev);border:1px solid var(--line-strong);border-radius:14px;box-shadow:var(--shadow-hover);
-  opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom left}
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom right}
 .chan.open{opacity:1;visibility:visible;transform:none}
 .chan.mail{bottom:144px}
 .chan-head{display:flex;align-items:center;gap:11px;padding:15px 17px;background:var(--ink-surface);color:var(--on-ink);position:sticky;top:0}
@@ -622,10 +669,10 @@ textarea.chan-field{resize:vertical;min-height:66px}
 .chan-send svg{width:18px;height:18px;fill:currentColor}
 
 /* ---- Fino: conversational assistant ---- */
-.fino{position:fixed;left:20px;bottom:144px;z-index:195;width:min(372px,calc(100vw - 40px));
+.fino{position:fixed;left:20px;bottom:84px;z-index:195;width:min(372px,calc(100vw - 40px));
   height:min(540px,calc(100vh - 180px));background:var(--elev);border:1px solid var(--line-strong);border-radius:14px;
   box-shadow:var(--shadow-hover);display:flex;flex-direction:column;overflow:hidden;
-  opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom left}
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.97);transition:var(--tr);transform-origin:bottom right}
 .fino.open{opacity:1;visibility:visible;transform:none}
 .fino-head{display:flex;align-items:center;gap:11px;padding:13px 15px;background:var(--ink-surface);color:var(--on-ink);flex:none}
 .fino-av{width:40px;height:40px;border-radius:50%;background:var(--green);color:#1c1c20;display:grid;place-items:center;
@@ -666,7 +713,7 @@ textarea.chan-field{resize:vertical;min-height:66px}
 .fino-send:disabled{opacity:.4;cursor:default}
 .fino-send svg{width:18px;height:18px}
 
-.gotop{position:fixed;right:20px;bottom:20px;z-index:140;width:46px;height:46px;border-radius:var(--r-sm);
+.gotop{position:fixed;left:20px;bottom:84px;right:auto;z-index:135;width:46px;height:46px;border-radius:var(--r-sm);
   display:grid;place-items:center;cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--ink);
   opacity:0;visibility:hidden;transform:translateY(10px);transition:var(--tr);box-shadow:var(--shadow-hover)}
 .gotop.show{opacity:1;visibility:visible;transform:none}
