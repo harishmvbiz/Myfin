@@ -105,36 +105,36 @@
 <div class="scrim" id="scrim"></div>
 
 <main id="main">
-<section class="section" style="padding-bottom:0">
-  <div class="wrapc">
+<section class="section">
+  <div class="wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span aria-current="page">About</span><span class="sep">/</span><span aria-current="page">Our Team</span></nav>
     <div class="shead" style="max-width:820px">
       <span class="label">Our team</span>
       <h1 style="margin-top:16px">The people behind Myfin</h1>
       <p class="lead" style="margin-top:18px">Degree-qualified, experienced consultants who share the same values — and a genuine commitment to your financial success.</p>
     </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="wrapc">
     <div class="card" style="padding:clamp(28px,4vw,44px)">
-      <span class="tag">Director</span>
-      <h2 style="font-size:1.8rem;margin:6px 0 4px">Suresh Swarna</h2>
-      <div class="trust" style="margin:14px 0 22px;justify-content:flex-start;gap:0">
-        <span class="ti">CPA</span><span class="ti"><span class="d"></span>FIPA</span><span class="ti"><span class="d"></span>Chartered Accountant</span><span class="ti"><span class="d"></span>Registered Tax Agent</span><span class="ti"><span class="d"></span>MFAA Credit Advisor</span>
-      </div>
-      <div class="prose" style="max-width:680px">
-        <p>Suresh is a veteran financial professional with over 15 years in the accounting industry and over four years in finance. He founded Myfin to help individuals and small and medium enterprises.</p>
-        <p>Over the years he has worked across many roles in the financial sector, developing a strong, extensive understanding of every aspect of finance. Myfin has benefited tremendously from his deep domain knowledge to build a very successful practice since its inception.</p>
-        <p>Suresh heads Myfin as its Director, responsible for overall strategy while also undertaking various other responsibilities as client needs require.</p>
+      <div class="prof">
+        <div class="prof-l">
+          <span class="tag">Director</span>
+          <h2 style="font-size:1.7rem;margin:6px 0 16px">Suresh Swarna</h2>
+          <ul class="cred-list">
+            <li>CPA</li><li>FIPA</li><li>Chartered Accountant (India)</li><li>Registered Tax Agent</li><li>MFAA Credit Advisor</li>
+          </ul>
+        </div>
+        <div class="prose" style="max-width:none">
+          <p>Suresh is a veteran financial professional with over 15 years in the accounting industry and over four years in finance. He founded Myfin to help individuals and small and medium enterprises.</p>
+          <p>Over the years he has worked across many roles in the financial sector, developing a strong, extensive understanding of every aspect of finance. Myfin has benefited tremendously from his deep domain knowledge to build a very successful practice since its inception.</p>
+          <p>Suresh heads Myfin as its Director, responsible for overall strategy while also undertaking various other responsibilities as client needs require.</p>
+        </div>
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card" style="margin-top:22px">
       <span class="tag">The wider team</span>
       <h2 style="font-size:1.4rem;margin:6px 0 10px">A team that shares the same values</h2>
-      <div class="prose" style="max-width:none">
+      <div class="prose cols2" style="max-width:none">
         <p>Myfin has a team of consultants who are degree-qualified and experienced in accounting, taxation and book-keeping. Our emphasis on continuous professional development keeps every consultant up to date with the ever-changing regulatory environment of the financial industry.</p>
         <p>We all share the same values and vision, and we always strive to provide service excellence.</p>
       </div>
@@ -143,7 +143,7 @@
 </section>
 
 <section class="section">
-  <div class="wrapc">
+  <div class="wrap">
     <div class="cta">
       <div>
         <span class="label">Get started</span>
@@ -507,6 +507,41 @@
     var o=p.classList.toggle('open'); var m=document.getElementById('finoMsgs'); if(o&&m&&!m.children.length) finoStart();
   };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeChannel('wa'); closeChannel('mail'); var p=document.getElementById('finoPanel'); if(p)p.classList.remove('open'); } });
+
+  /* ---------- testimonials slider (responsive 2-up) ---------- */
+  (function(){
+    var track=document.getElementById('tTrack'); if(!track)return;
+    var slides=track.children, total=slides.length, idx=0, timer=null;
+    var dotsBox=document.getElementById('tDots');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function per(){ return window.innerWidth<=760?1:2; }
+    function maxIdx(){ return Math.max(0,total-per()); }
+    function buildDots(){
+      if(!dotsBox)return; dotsBox.innerHTML='';
+      for(var k=0;k<=maxIdx();k++){
+        var d=document.createElement('button'); d.type='button'; d.className='tdot'; d.setAttribute('aria-label','Go to slide '+(k+1));
+        (function(n){ d.addEventListener('click',function(){ go(n); reset(); }); })(k);
+        dotsBox.appendChild(d);
+      }
+    }
+    function go(n){
+      var mx=maxIdx(); idx=Math.max(0,Math.min(n,mx));
+      track.style.transform='translateX(-'+(idx*(100/per()))+'%)';
+      if(dotsBox){ for(var k=0;k<dotsBox.children.length;k++){ dotsBox.children[k].classList.toggle('active',k===idx); } }
+    }
+    function next(){ go(idx>=maxIdx()?0:idx+1); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(reduce)return; stop(); timer=setInterval(next,6000); }
+    function reset(){ stop(); start(); }
+    var nb=document.getElementById('tNext'), pb=document.getElementById('tPrev');
+    if(nb) nb.addEventListener('click',function(){ next(); reset(); });
+    if(pb) pb.addEventListener('click',function(){ go(idx<=0?maxIdx():idx-1); reset(); });
+    var sl=document.getElementById('tSlider');
+    if(sl){ sl.addEventListener('mouseenter',stop); sl.addEventListener('mouseleave',start); }
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
+    buildDots(); go(0); start();
+  })();
 
   var goTop=$('#goTop');
   function onScroll(){ if(!goTop)return; if(window.pageYOffset>520) goTop.classList.add('show'); else goTop.classList.remove('show'); }

@@ -102,23 +102,20 @@
 <div class="scrim" id="scrim"></div>
 
 <main id="main">
-<section class="section" style="padding-bottom:0">
-  <div class="wrapc">
+<section class="section">
+  <div class="wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span aria-current="page">About</span><span class="sep">/</span><span aria-current="page">Why Myfin</span></nav>
     <div class="shead" style="max-width:820px">
       <span class="label">Why we're different</span>
       <h1 style="margin-top:16px">Why partner with Myfin?</h1>
       <p class="lead" style="margin-top:18px">We're all about adding value to your finances. There are plenty of good reasons to choose us — here are the ones our clients tell us matter most.</p>
     </div>
+    <div class="grid g2"><div class="card"><span class="tag">Reason · 01</span><h2 style="font-size:1.3rem;margin-bottom:12px">Experienced team of consultants</h2><div class="prose" style="max-width:none"><ul><li>Our consultants are experienced and fully qualified</li><li>All are IPA, CPA or CA qualified, or actively pursuing it</li><li>Trust, integrity and honesty are our core values</li></ul></div></div><div class="card"><span class="tag">Reason · 02</span><h2 style="font-size:1.3rem;margin-bottom:12px">Personalised but affordable</h2><div class="prose" style="max-width:none"><ul><li>A small, approachable team providing genuinely personalised service</li><li>We don't charge for every phone call, email or chat</li><li>Free, no-obligation initial consultation for business clients</li><li>A fixed-fee model for accounting and taxation</li><li>Very competitive fees compared with any accounting firm</li></ul></div></div><div class="card"><span class="tag">Reason · 03</span><h2 style="font-size:1.3rem;margin-bottom:12px">A full suite of services</h2><div class="prose" style="max-width:none"><ul><li>Accounting and business services</li><li>Tax returns and planning for all entities</li><li>Book-keeping for small and medium businesses</li><li>Mortgage broking for buyers, investors and businesses</li><li>Specialised services for medical professionals, builders and investors</li></ul></div></div><div class="card"><span class="tag">Reason · 04</span><h2 style="font-size:1.3rem;margin-bottom:12px">A proactive approach</h2><div class="prose" style="max-width:none"><ul><li>We help get your business ideas off the ground</li><li>We don't just prepare returns — we give tips on saving tax</li><li>Our book-keepers focus on better systems to cut your cost</li><li>We help you find suitable properties with profile reports</li></ul></div></div></div>
   </div>
 </section>
 
 <section class="section">
-  <div class="wrapc"><div class="card" style="margin-bottom:18px"><span class="tag">Reason · 01</span><h2 style="font-size:1.4rem;margin-bottom:12px">Experienced team of consultants</h2><div class="prose" style="max-width:none"><ul><li>Our consultants are experienced and fully qualified</li><li>All are IPA, CPA or CA qualified, or actively pursuing it</li><li>Trust, integrity and honesty are our core values</li></ul></div></div><div class="card" style="margin-bottom:18px"><span class="tag">Reason · 02</span><h2 style="font-size:1.4rem;margin-bottom:12px">Personalised but affordable</h2><div class="prose" style="max-width:none"><ul><li>A small, approachable team providing genuinely personalised service</li><li>We don't charge for every phone call, email or chat</li><li>Free, no-obligation initial consultation for business clients</li><li>A fixed-fee model for accounting and taxation</li><li>Very competitive fees compared with any accounting firm</li></ul></div></div><div class="card" style="margin-bottom:18px"><span class="tag">Reason · 03</span><h2 style="font-size:1.4rem;margin-bottom:12px">A full suite of services</h2><div class="prose" style="max-width:none"><ul><li>Accounting and business services</li><li>Tax returns and planning for all entities</li><li>Book-keeping for small and medium businesses</li><li>Mortgage broking for buyers, investors and businesses</li><li>Specialised services for medical professionals, builders and investors</li></ul></div></div><div class="card" style="margin-bottom:18px"><span class="tag">Reason · 04</span><h2 style="font-size:1.4rem;margin-bottom:12px">A proactive approach</h2><div class="prose" style="max-width:none"><ul><li>We help get your business ideas off the ground</li><li>We don't just prepare returns — we give tips on saving tax</li><li>Our book-keepers focus on better systems to cut your cost</li><li>We help you find suitable properties with profile reports</li></ul></div></div></div>
-</section>
-
-<section class="section">
-  <div class="wrapc">
+  <div class="wrap">
     <div class="cta">
       <div>
         <span class="label">Get started</span>
@@ -482,6 +479,41 @@
     var o=p.classList.toggle('open'); var m=document.getElementById('finoMsgs'); if(o&&m&&!m.children.length) finoStart();
   };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeChannel('wa'); closeChannel('mail'); var p=document.getElementById('finoPanel'); if(p)p.classList.remove('open'); } });
+
+  /* ---------- testimonials slider (responsive 2-up) ---------- */
+  (function(){
+    var track=document.getElementById('tTrack'); if(!track)return;
+    var slides=track.children, total=slides.length, idx=0, timer=null;
+    var dotsBox=document.getElementById('tDots');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function per(){ return window.innerWidth<=760?1:2; }
+    function maxIdx(){ return Math.max(0,total-per()); }
+    function buildDots(){
+      if(!dotsBox)return; dotsBox.innerHTML='';
+      for(var k=0;k<=maxIdx();k++){
+        var d=document.createElement('button'); d.type='button'; d.className='tdot'; d.setAttribute('aria-label','Go to slide '+(k+1));
+        (function(n){ d.addEventListener('click',function(){ go(n); reset(); }); })(k);
+        dotsBox.appendChild(d);
+      }
+    }
+    function go(n){
+      var mx=maxIdx(); idx=Math.max(0,Math.min(n,mx));
+      track.style.transform='translateX(-'+(idx*(100/per()))+'%)';
+      if(dotsBox){ for(var k=0;k<dotsBox.children.length;k++){ dotsBox.children[k].classList.toggle('active',k===idx); } }
+    }
+    function next(){ go(idx>=maxIdx()?0:idx+1); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(reduce)return; stop(); timer=setInterval(next,6000); }
+    function reset(){ stop(); start(); }
+    var nb=document.getElementById('tNext'), pb=document.getElementById('tPrev');
+    if(nb) nb.addEventListener('click',function(){ next(); reset(); });
+    if(pb) pb.addEventListener('click',function(){ go(idx<=0?maxIdx():idx-1); reset(); });
+    var sl=document.getElementById('tSlider');
+    if(sl){ sl.addEventListener('mouseenter',stop); sl.addEventListener('mouseleave',start); }
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
+    buildDots(); go(0); start();
+  })();
 
   var goTop=$('#goTop');
   function onScroll(){ if(!goTop)return; if(window.pageYOffset>520) goTop.classList.add('show'); else goTop.classList.remove('show'); }

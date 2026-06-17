@@ -49,7 +49,7 @@ A brand-new, hand-built website for **Myfin Group Pty Ltd** — a static site (p
 
 - Mobile-friendly, with a slide-in menu on phones.
 - **Dark mode** toggle (moon icon) and an **accessibility panel** (person icon: larger text, grayscale, underline links, reduce motion). Choices are remembered on the visitor's device.
-- **Three floating buttons** on every page — **WhatsApp**, **Email**, and the **Fino** assistant. WhatsApp and Email each open a short guided flow (service → topic → type → your details) that drafts a clear message and opens WhatsApp or your email app. **Fino** is a conversational assistant that collects your enquiry and emails it to you via Web3Forms. The Contact page repeats these as three tappable cards.
+- **Three floating buttons** on every page — **WhatsApp**, **Email**, and the **Fino** assistant. WhatsApp and Email each open a short guided flow (service → topic → type → your details) that drafts a clear message and opens WhatsApp or your email app. **Fino** is a conversational assistant that collects your enquiry and emails it to you via Web3Forms. The Contact page repeats these as three tappable cards. The home page also has a testimonials slider (auto-advancing, with arrows and dots) beside a "Read more testimonials" link.
 - A **contact form** that emails enquiries to you (needs a free key — see §3).
 - SEO essentials on every page: unique titles and descriptions, social-share tags, and structured data (so Google can show your business, services, FAQs and reviews richly).
 

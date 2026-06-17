@@ -146,7 +146,7 @@
 <section class="section alt">
   <div class="wrap">
     <div class="shead"><span class="label">How it works</span><h2>Working with Myfin</h2></div>
-    <div class="steps" style="max-width:880px"><div class="step"><span class="no">01</span><div><h4>Talk to us</h4><p>Book a free, no-obligation consultation at any of our three Brisbane offices, or by phone, email or WhatsApp.</p></div></div><div class="step"><span class="no">02</span><div><h4>We tailor a plan</h4><p>We look at your situation and agree a fixed fee or hourly plan — and guarantee a lower fee than your previous accountant.</p></div></div><div class="step"><span class="no">03</span><div><h4>We get to work</h4><p>From set-up and lodgment to ongoing advice, we manage the detail and keep you compliant, all year round.</p></div></div><div class="step"><span class="no">04</span><div><h4>We stay proactive</h4><p>We plan ahead, find savings and are there whenever you need us — not just at tax time.</p></div></div></div>
+    <div class="steps"><div class="step"><span class="no">01</span><div><h4>Talk to us</h4><p>Book a free, no-obligation consultation at any of our three Brisbane offices, or by phone, email or WhatsApp.</p></div></div><div class="step"><span class="no">02</span><div><h4>We tailor a plan</h4><p>We look at your situation and agree a fixed fee or hourly plan — and guarantee a lower fee than your previous accountant.</p></div></div><div class="step"><span class="no">03</span><div><h4>We get to work</h4><p>From set-up and lodgment to ongoing advice, we manage the detail and keep you compliant, all year round.</p></div></div><div class="step"><span class="no">04</span><div><h4>We stay proactive</h4><p>We plan ahead, find savings and are there whenever you need us — not just at tax time.</p></div></div></div>
   </div>
 </section>
 
@@ -515,6 +515,41 @@
     var o=p.classList.toggle('open'); var m=document.getElementById('finoMsgs'); if(o&&m&&!m.children.length) finoStart();
   };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeChannel('wa'); closeChannel('mail'); var p=document.getElementById('finoPanel'); if(p)p.classList.remove('open'); } });
+
+  /* ---------- testimonials slider (responsive 2-up) ---------- */
+  (function(){
+    var track=document.getElementById('tTrack'); if(!track)return;
+    var slides=track.children, total=slides.length, idx=0, timer=null;
+    var dotsBox=document.getElementById('tDots');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function per(){ return window.innerWidth<=760?1:2; }
+    function maxIdx(){ return Math.max(0,total-per()); }
+    function buildDots(){
+      if(!dotsBox)return; dotsBox.innerHTML='';
+      for(var k=0;k<=maxIdx();k++){
+        var d=document.createElement('button'); d.type='button'; d.className='tdot'; d.setAttribute('aria-label','Go to slide '+(k+1));
+        (function(n){ d.addEventListener('click',function(){ go(n); reset(); }); })(k);
+        dotsBox.appendChild(d);
+      }
+    }
+    function go(n){
+      var mx=maxIdx(); idx=Math.max(0,Math.min(n,mx));
+      track.style.transform='translateX(-'+(idx*(100/per()))+'%)';
+      if(dotsBox){ for(var k=0;k<dotsBox.children.length;k++){ dotsBox.children[k].classList.toggle('active',k===idx); } }
+    }
+    function next(){ go(idx>=maxIdx()?0:idx+1); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(reduce)return; stop(); timer=setInterval(next,6000); }
+    function reset(){ stop(); start(); }
+    var nb=document.getElementById('tNext'), pb=document.getElementById('tPrev');
+    if(nb) nb.addEventListener('click',function(){ next(); reset(); });
+    if(pb) pb.addEventListener('click',function(){ go(idx<=0?maxIdx():idx-1); reset(); });
+    var sl=document.getElementById('tSlider');
+    if(sl){ sl.addEventListener('mouseenter',stop); sl.addEventListener('mouseleave',start); }
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
+    buildDots(); go(0); start();
+  })();
 
   var goTop=$('#goTop');
   function onScroll(){ if(!goTop)return; if(window.pageYOffset>520) goTop.classList.add('show'); else goTop.classList.remove('show'); }

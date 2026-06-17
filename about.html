@@ -102,8 +102,8 @@
 <div class="scrim" id="scrim"></div>
 
 <main id="main">
-<section class="section" style="padding-bottom:0">
-  <div class="wrapc">
+<section class="section">
+  <div class="wrap">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">/</span><span aria-current="page">About</span><span class="sep">/</span><span aria-current="page">Who We Are</span></nav>
     <div class="shead" style="max-width:840px">
       <span class="label">Who we are</span>
@@ -111,16 +111,13 @@
       <p class="lead" style="margin-top:18px">Myfin is a Brisbane-based boutique accounting and mortgage broking firm, with offices in Salisbury, Lutwyche and Heathwood. We offer accounting, tax, book-keeping and mortgage broking, tailored to individuals and to small and medium businesses.</p>
     </div>
     <div><div class="trust"><span class="ti">CPA &amp; Chartered Accountant</span><span class="ti"><span class="d"></span>Registered Tax Agent</span><span class="ti"><span class="d"></span>MFAA Credit Advisor</span><span class="ti"><span class="d"></span>Xero certified partner</span><span class="ti"><span class="d"></span>15+ years</span></div></div>
+    <div class="grid g3" style="margin-top:clamp(36px,5vw,60px)"><div class="card"><span class="tag">01</span><h3>Mission</h3><p>To be a trusted partner and advisor, helping clients realise maximum value for their financial investments — combining deep expertise with a friendly, long-term approach.</p></div><div class="card"><span class="tag">02</span><h3>Vision</h3><p>To become the only partner you'll ever need for all your financial requirements, whether you're an individual or a growing business.</p></div><div class="card"><span class="tag">03</span><h3>Values</h3><p>Meaningful, empathetic, long-term relationships built on trust and integrity, with transparency and honesty in everything we do.</p></div></div>
   </div>
 </section>
 
-<section class="section">
-  <div class="wrapc"><div class="grid g3"><div class="card"><span class="tag">01</span><h3>Mission</h3><p>To be a trusted partner and advisor, helping clients realise maximum value for their financial investments — combining deep expertise with a friendly, long-term approach.</p></div><div class="card"><span class="tag">02</span><h3>Vision</h3><p>To become the only partner you'll ever need for all your financial requirements, whether you're an individual or a growing business.</p></div><div class="card"><span class="tag">03</span><h3>Values</h3><p>Meaningful, empathetic, long-term relationships built on trust and integrity, with transparency and honesty in everything we do.</p></div></div></div>
-</section>
-
 <section class="section alt">
-  <div class="wrapc">
-    <div class="prose">
+  <div class="wrap">
+    <div class="prose cols2" style="max-width:none">
       <p>Our motto is to offer excellence in service while keeping a friendly touch. Our expertise is backed by a dedicated team of experienced consultants, and we offer personalised services to meet each client's specific requirements.</p>
       <p>We provide an integrated approach to financial consulting — going beyond your immediate requirements to a holistic solution. One stop for accounting, taxation, book-keeping and mortgage broking, aimed at helping you get the best possible value for your wealth.</p>
       <p>We aspire to become your trusted partner in pursuing your important financial goals. To learn more about how we can help, please contact any of our offices.</p>
@@ -129,7 +126,7 @@
 </section>
 
 <section class="section">
-  <div class="wrapc">
+  <div class="wrap">
     <div class="cta">
       <div>
         <span class="label">Get started</span>
@@ -493,6 +490,41 @@
     var o=p.classList.toggle('open'); var m=document.getElementById('finoMsgs'); if(o&&m&&!m.children.length) finoStart();
   };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeChannel('wa'); closeChannel('mail'); var p=document.getElementById('finoPanel'); if(p)p.classList.remove('open'); } });
+
+  /* ---------- testimonials slider (responsive 2-up) ---------- */
+  (function(){
+    var track=document.getElementById('tTrack'); if(!track)return;
+    var slides=track.children, total=slides.length, idx=0, timer=null;
+    var dotsBox=document.getElementById('tDots');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function per(){ return window.innerWidth<=760?1:2; }
+    function maxIdx(){ return Math.max(0,total-per()); }
+    function buildDots(){
+      if(!dotsBox)return; dotsBox.innerHTML='';
+      for(var k=0;k<=maxIdx();k++){
+        var d=document.createElement('button'); d.type='button'; d.className='tdot'; d.setAttribute('aria-label','Go to slide '+(k+1));
+        (function(n){ d.addEventListener('click',function(){ go(n); reset(); }); })(k);
+        dotsBox.appendChild(d);
+      }
+    }
+    function go(n){
+      var mx=maxIdx(); idx=Math.max(0,Math.min(n,mx));
+      track.style.transform='translateX(-'+(idx*(100/per()))+'%)';
+      if(dotsBox){ for(var k=0;k<dotsBox.children.length;k++){ dotsBox.children[k].classList.toggle('active',k===idx); } }
+    }
+    function next(){ go(idx>=maxIdx()?0:idx+1); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(reduce)return; stop(); timer=setInterval(next,6000); }
+    function reset(){ stop(); start(); }
+    var nb=document.getElementById('tNext'), pb=document.getElementById('tPrev');
+    if(nb) nb.addEventListener('click',function(){ next(); reset(); });
+    if(pb) pb.addEventListener('click',function(){ go(idx<=0?maxIdx():idx-1); reset(); });
+    var sl=document.getElementById('tSlider');
+    if(sl){ sl.addEventListener('mouseenter',stop); sl.addEventListener('mouseleave',start); }
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
+    buildDots(); go(0); start();
+  })();
 
   var goTop=$('#goTop');
   function onScroll(){ if(!goTop)return; if(window.pageYOffset>520) goTop.classList.add('show'); else goTop.classList.remove('show'); }

@@ -483,6 +483,41 @@
   };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeChannel('wa'); closeChannel('mail'); var p=document.getElementById('finoPanel'); if(p)p.classList.remove('open'); } });
 
+  /* ---------- testimonials slider (responsive 2-up) ---------- */
+  (function(){
+    var track=document.getElementById('tTrack'); if(!track)return;
+    var slides=track.children, total=slides.length, idx=0, timer=null;
+    var dotsBox=document.getElementById('tDots');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function per(){ return window.innerWidth<=760?1:2; }
+    function maxIdx(){ return Math.max(0,total-per()); }
+    function buildDots(){
+      if(!dotsBox)return; dotsBox.innerHTML='';
+      for(var k=0;k<=maxIdx();k++){
+        var d=document.createElement('button'); d.type='button'; d.className='tdot'; d.setAttribute('aria-label','Go to slide '+(k+1));
+        (function(n){ d.addEventListener('click',function(){ go(n); reset(); }); })(k);
+        dotsBox.appendChild(d);
+      }
+    }
+    function go(n){
+      var mx=maxIdx(); idx=Math.max(0,Math.min(n,mx));
+      track.style.transform='translateX(-'+(idx*(100/per()))+'%)';
+      if(dotsBox){ for(var k=0;k<dotsBox.children.length;k++){ dotsBox.children[k].classList.toggle('active',k===idx); } }
+    }
+    function next(){ go(idx>=maxIdx()?0:idx+1); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function start(){ if(reduce)return; stop(); timer=setInterval(next,6000); }
+    function reset(){ stop(); start(); }
+    var nb=document.getElementById('tNext'), pb=document.getElementById('tPrev');
+    if(nb) nb.addEventListener('click',function(){ next(); reset(); });
+    if(pb) pb.addEventListener('click',function(){ go(idx<=0?maxIdx():idx-1); reset(); });
+    var sl=document.getElementById('tSlider');
+    if(sl){ sl.addEventListener('mouseenter',stop); sl.addEventListener('mouseleave',start); }
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(idx,maxIdx())); },150); });
+    buildDots(); go(0); start();
+  })();
+
   var goTop=$('#goTop');
   function onScroll(){ if(!goTop)return; if(window.pageYOffset>520) goTop.classList.add('show'); else goTop.classList.remove('show'); }
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
